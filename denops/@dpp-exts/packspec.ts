@@ -7,14 +7,14 @@ import { Denops } from "https://deno.land/x/dpp_vim@v0.0.7/deps.ts";
 
 type Params = Record<string, never>;
 
-type LocalArgs = {
+type PackspecArgs = {
   plugins: Plugin[];
 };
 
 export class Ext extends BaseExt<Params> {
   override actions: Actions<Params> = {
     load: {
-      description: "Load local plugins",
+      description: "Load Packspec files",
       callback: async (_args: {
         denops: Denops;
         actionParams: unknown;

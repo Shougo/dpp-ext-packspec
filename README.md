@@ -1,4 +1,4 @@
-# dpp-ext-local
+# dpp-ext-packspec
 
 This ext implements packspec support.
 
