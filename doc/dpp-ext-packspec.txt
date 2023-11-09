@@ -56,6 +56,9 @@ load
 
 		params:
 			{plugins}:	search plugins.
+					NOTE: The plugins must be installed.
+					Because packspec file is under the top
+					of plugin directory.
 					(Required)
 
 ==============================================================================
