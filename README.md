@@ -4,6 +4,8 @@ This ext implements packspec support.
 
 https://github.com/neovim/packspec
 
+NOTE: dependencies are only supported.
+
 ## Required
 
 ### denops.vim
@@ -26,6 +28,7 @@ const packspecPlugins = await args.dpp.extAction(
   "packspec",
   "load",
   {
+    basePath,
     plugins,
   },
 ) as Plugin[];

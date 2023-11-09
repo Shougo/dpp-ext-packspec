@@ -20,6 +20,7 @@ This ext implements packspec support.
 
 https://github.com/neovim/packspec
 
+NOTE: dependencies are only supported.
 
 ==============================================================================
 INSTALL                                             *dpp-ext-packspec-install*
@@ -42,6 +43,7 @@ EXAMPLES                                           *dpp-ext-packspec-examples*
 	  "packspec",
 	  "load",
 	  {
+	    basePath,
 	    plugins,
 	  },
 	) as Plugin[];
@@ -55,6 +57,8 @@ load
 		Returns packspec plugins.
 
 		params:
+			{basePath}:	dpp.vim base path.
+
 			{plugins}:	search plugins.
 					NOTE: The plugins must be installed.
 					Because packspec file is under the top
