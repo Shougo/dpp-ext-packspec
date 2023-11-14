@@ -31,5 +31,5 @@ const packspecPlugins = await args.dpp.extAction(
     basePath,
     plugins,
   },
-) as Plugin[];
+) as Plugin[] | undefined;
 ```

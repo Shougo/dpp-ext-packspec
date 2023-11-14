@@ -46,7 +46,7 @@ EXAMPLES                                           *dpp-ext-packspec-examples*
 	    basePath,
 	    plugins,
 	  },
-	) as Plugin[];
+	) as Plugin[] | undefined;
 <
 
 ==============================================================================
