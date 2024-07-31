@@ -1,13 +1,15 @@
 import {
   Actions,
   BaseExt,
+  Denops,
   Plugin,
-} from "https://deno.land/x/dpp_vim@v0.2.0/types.ts";
-import { basename, Denops } from "https://deno.land/x/dpp_vim@v0.2.0/deps.ts";
+} from "jsr:@shougo/dpp-vim@1.0.0/types";
 import {
   isDirectory,
   safeStat,
-} from "https://deno.land/x/dpp_vim@v0.2.0/utils.ts";
+} from "jsr:@shougo/dpp-vim@1.0.0/utils";
+
+import { basename } from "jsr:@std/path@1.0.2";
 
 type Packspec = {
   name?: string;
