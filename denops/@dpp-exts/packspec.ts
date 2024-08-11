@@ -1,17 +1,20 @@
 import {
-  Actions,
+  type Actions,
   BaseExt,
-  Denops,
-  Plugin,
-} from "jsr:@shougo/dpp-vim@1.0.0/types";
+  type Plugin,
+} from "jsr:@shougo/dpp-vim@2.1.0/types";
 import {
   isDirectory,
   safeStat,
-} from "jsr:@shougo/dpp-vim@1.0.0/utils";
+} from "jsr:@shougo/dpp-vim@2.1.0/utils";
+
+import type { Denops } from "jsr:@denops/std@~7.0.1";
 
 import { basename } from "jsr:@std/path@1.0.2";
 
-type Packspec = {
+export type Params = Record<string, never>;
+
+export type Packspec = {
   name?: string;
   description?: string;
   engines?: Record<string, string>;
@@ -22,9 +25,7 @@ type Packspec = {
   dependencies?: Record<string, string>;
 };
 
-type Params = Record<string, never>;
-
-type PackspecArgs = {
+export type PackspecArgs = {
   basePath: string;
   plugins: Plugin[];
 };
