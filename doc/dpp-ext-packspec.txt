@@ -34,19 +34,42 @@ https://github.com/vim-denops/denops.vim
 ==============================================================================
 EXAMPLES                                           *dpp-ext-packspec-examples*
 >typescript
+	import type {
+	  Ext as PackspecExt,
+	  Params as PackspecParams,
+	} from "jsr:@shougo/dpp-ext-packspec";
+
 	const [context, options] = await args.contextBuilder.get(args.denops);
 	
-	const packspecPlugins = await args.dpp.extAction(
-	  args.denops,
-	  context,
-	  options,
-	  "packspec",
-	  "load",
-	  {
-	    basePath,
-	    plugins,
-	  },
-	) as Plugin[] | undefined;
+	// Get plugins from other exts
+	const plugins = ...
+	
+	const [packspecExt, packspecOptions, packspecParams]: [
+	  PackspecExt | undefined,
+	  ExtOptions,
+	  PackspecParams,
+	] = await args.dpp
+	  .getExt(
+	    args.denops,
+	    options,
+	    "packspec",
+	  ) as [PackspecExt | undefined, ExtOptions, PackspecParams];
+	if (packspecExt) {
+	  const action = packspecExt.actions.load;
+	
+	  const packSpecPlugins = await action.callback({
+	    denops: args.denops,
+	    context,
+	    options,
+	    protocols,
+	    extOptions: packspecOptions,
+	    extParams: packspecParams,
+	    actionParams: {
+	      basePath: args.basePath,
+	      plugins,
+	    },
+	  });
+	}
 <
 
 ==============================================================================
