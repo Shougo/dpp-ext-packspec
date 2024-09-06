@@ -1,17 +1,10 @@
-import {
-  type Action,
-  type BaseActionParams,
-  BaseExt,
-  type Plugin,
-} from "jsr:@shougo/dpp-vim@~2.2.0/types";
-import {
-  isDirectory,
-  safeStat,
-} from "jsr:@shougo/dpp-vim@2.2.0/utils";
+import { type BaseParams, type Plugin } from "jsr:@shougo/dpp-vim@~3.0.0/types";
+import { type Action, BaseExt } from "jsr:@shougo/dpp-vim@~3.0.0/ext";
+import { isDirectory, safeStat } from "jsr:@shougo/dpp-vim@3.0.0/utils";
 
-import type { Denops } from "jsr:@denops/std@~7.0.1";
+import type { Denops } from "jsr:@denops/std@~7.1.0";
 
-import { basename } from "jsr:@std/path@1.0.2";
+import { basename } from "jsr:@std/path@~1.0.2/basename";
 
 export type Params = Record<string, never>;
 
@@ -31,9 +24,9 @@ export type PackspecArgs = {
   plugins: Plugin[];
 };
 
-export type ExtActions<Params extends BaseActionParams> = {
+export type ExtActions<Params extends BaseParams> = {
   load: Action<Params, Plugin[]>;
-}
+};
 
 export class Ext extends BaseExt<Params> {
   override actions: ExtActions<Params> = {
@@ -41,7 +34,7 @@ export class Ext extends BaseExt<Params> {
       description: "Load Packspec files",
       callback: async (args: {
         denops: Denops;
-        actionParams: unknown;
+        actionParams: BaseParams;
       }) => {
         const params = args.actionParams as PackspecArgs;
         const plugins = [];
