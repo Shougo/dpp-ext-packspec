@@ -20,7 +20,8 @@ This ext implements packspec support.
 
 https://github.com/neovim/packspec
 
-NOTE: dependencies are only supported.
+NOTE: Plugin dependencies are only supported.
+NOTE: Plugins must be installed to load packspec files.
 
 ==============================================================================
 INSTALL                                             *dpp-ext-packspec-install*

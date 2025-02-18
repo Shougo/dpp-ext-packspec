@@ -1,8 +1,8 @@
-import { type BaseParams, type Plugin } from "jsr:@shougo/dpp-vim@~3.0.0/types";
-import { type Action, BaseExt } from "jsr:@shougo/dpp-vim@~3.0.0/ext";
-import { isDirectory, safeStat } from "jsr:@shougo/dpp-vim@3.0.0/utils";
+import { type BaseParams, type Plugin } from "jsr:@shougo/dpp-vim@~4.1.0/types";
+import { type Action, BaseExt } from "jsr:@shougo/dpp-vim@~4.1.0/ext";
+import { isDirectory, safeStat } from "jsr:@shougo/dpp-vim@~4.1.0/utils";
 
-import type { Denops } from "jsr:@denops/std@~7.1.0";
+import type { Denops } from "jsr:@denops/std@~7.4.0";
 
 import { basename } from "jsr:@std/path@~1.0.2/basename";
 
@@ -80,7 +80,7 @@ export class Ext extends BaseExt<Params> {
           const name = basename(url);
           if (!pluginNames.has(name)) {
             plugins.push({
-              name: name,
+              name,
               repo: url,
             });
           }
