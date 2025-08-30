@@ -11,6 +11,6 @@
   "imports": {
     "@denops/std": "jsr:@denops/std@~8.0.0",
     "@shougo/dpp-vim": "jsr:@shougo/dpp-vim@~5.0.0",
-    "@std/path": "jsr:@std/async@~1.1.2"
+    "@std/path": "jsr:@std/path@~1.1.2"
   }
 }
