@@ -4,8 +4,8 @@ This ext implements packspec support.
 
 https://github.com/neovim/packspec
 
-NOTE: Plugin dependencies are only supported.
-NOTE: Plugins must be installed to load packspec files.
+NOTE: Plugin dependencies are only supported. NOTE: Plugins must be installed to
+load packspec files.
 
 ## Required
 

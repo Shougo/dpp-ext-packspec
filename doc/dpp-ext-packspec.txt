@@ -3,7 +3,7 @@
 Author: Shougo <Shougo.Matsu at gmail.com>
 License: MIT license
 
-CONTENTS                                              *dpp-ext-packspec-contents*
+CONTENTS                                           *dpp-ext-packspec-contents*
 
 Introduction		|dpp-ext-packspec-introduction|
 Install			|dpp-ext-packspec-install|
@@ -77,7 +77,7 @@ EXAMPLES                                           *dpp-ext-packspec-examples*
 ==============================================================================
 ACTIONS                                             *dpp-ext-packspec-actions*
 
-                                            *dpp-ext-packspec-action-load*
+                                                *dpp-ext-packspec-action-load*
 load
 		Returns packspec plugins.
 

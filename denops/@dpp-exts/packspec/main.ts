@@ -1,4 +1,4 @@
-import { type BaseParams, type Plugin } from "@shougo/dpp-vim/types";
+import type { BaseParams, Plugin } from "@shougo/dpp-vim/types";
 import { type Action, BaseExt } from "@shougo/dpp-vim/ext";
 import { isDirectory, safeStat } from "@shougo/dpp-vim/utils";
 
@@ -37,36 +37,39 @@ export class Ext extends BaseExt<Params> {
         actionParams: BaseParams;
       }) => {
         const params = args.actionParams as PackspecArgs;
-        const plugins = [];
+        const plugins: Plugin[] = [];
         const depends = new Set<string>();
         const pluginNames = new Set<string>();
 
         for (const plugin of params.plugins) {
-          pluginNames.add(plugin.name);
+          if (plugin.name) {
+            pluginNames.add(plugin.name);
+          }
 
-          // Set default path from basePath
           const pluginPath = plugin.path ??
             `${params.basePath}/repos/${plugin.repo ?? plugin.name}`;
           const specPath = `${pluginPath}/pkg.json`;
-          if (!await isDirectory(pluginPath) || !await safeStat(specPath)) {
+
+          const hasPluginDir = await isDirectory(pluginPath);
+          const hasSpecFile = !!await safeStat(specPath);
+          if (!hasPluginDir || !hasSpecFile) {
             continue;
           }
 
-          // Load packspec.
-          const packspec = JSON.parse(
-            await Deno.readTextFile(specPath),
-          ) as Packspec;
+          const content = await Deno.readTextFile(specPath);
+          const packspec = JSON.parse(content) as Packspec;
 
-          const packspecPlugin = {
-            name: packspec.name ?? basename(packspec.repository.url),
+          const pluginName = packspec.name ?? basename(packspec.repository.url);
+          const packspecPlugin: Plugin = {
+            name: pluginName,
             repo: packspec.repository.url,
-          } as Plugin;
+          };
 
           if (packspec.dependencies) {
-            // Add dependencies
-            packspecPlugin.depends = Object.keys(packspec.dependencies).map((
-              depend,
-            ) => basename(depend));
+            packspecPlugin.depends = Object.keys(packspec.dependencies).map(
+              (depend) => basename(depend),
+            );
+
             for (const url of Object.keys(packspec.dependencies)) {
               depends.add(url);
             }
@@ -75,15 +78,16 @@ export class Ext extends BaseExt<Params> {
           plugins.push(packspecPlugin);
         }
 
-        // Convert dependencies to plugins
         for (const url of depends) {
           const name = basename(url);
-          if (!pluginNames.has(name)) {
-            plugins.push({
-              name,
-              repo: url,
-            });
+          if (pluginNames.has(name)) {
+            continue;
           }
+
+          plugins.push({
+            name,
+            repo: url,
+          });
         }
 
         return plugins;
